@@ -20,3 +20,6 @@ class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
+    # set a reminder for when quantity is less than 0
+    
+
