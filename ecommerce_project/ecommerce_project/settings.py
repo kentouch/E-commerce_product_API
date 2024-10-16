@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'api',
     'rest_framework',
+    'api'
 ]
 
 MIDDLEWARE = [
@@ -52,6 +52,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'ecommerce_project.urls'
+
+"""# apply pagination to all views
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}"""
 
 TEMPLATES = [
     {
@@ -71,6 +77,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ecommerce_project.wsgi.application'
 
+# Let's register our CustomUser model
+AUTH_USER_MODEL = 'api.CustomUser'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
