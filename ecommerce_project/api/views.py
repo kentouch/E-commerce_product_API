@@ -1,13 +1,25 @@
 from django.shortcuts import render
 from rest_framework.pagination import PageNumberPagination
-from .serializers import ProductSerializer
+from .serializers import ProductSerializer, CategorySerializer
 from .permissions import IsAdminOrReadOnly
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .models import Product
+from .models import Product, Category
 from rest_framework import generics, filters
 
 # Create your views here.
+
+# Category list view for more flexibility
+class CategoryListCreateView(generics.ListCreateAPIView):
+    # Authentication classes
+    authentication_classes = [TokenAuthentication]
+    # Model serializer
+    serializer_class = CategorySerializer
+    # set category model to the view
+    def get_queryset(self):
+        return Category.objects.all()
+
+
 # create a pagination class
 class ProductPagination(PageNumberPagination):
     # set the default page size
@@ -45,5 +57,9 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProductSerializer
 
     # set a reminder for when quantity is less than 0
+
+
+    
+      
     
 

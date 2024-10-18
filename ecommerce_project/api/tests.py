@@ -140,3 +140,28 @@ class BookAPITest(test.APITestCase):
 
         # check that the book is deleted
         self.assertEqual(Product.objects.count(), 1)
+
+
+    ### Test category list and its creation
+
+    # list all categories
+    def test_list_category(self):
+
+        # url for the API endpoint to list categories
+        url = reverse('category-list')
+        # Simulate a get request 
+        response = self.client.get(url) 
+        # checking if the request is succeeding 
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_create_category(self):
+        # url for the API endpoint to create a category
+        url = reverse('category-list')
+        # enter category data
+        data = {
+                'name': 'Electronics'
+        }
+        
+        response = self.client.post(url, data, format='json')
+        # let's see if the creation process succeeded
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)

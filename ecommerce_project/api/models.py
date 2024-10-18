@@ -28,6 +28,7 @@ class CustomUserManager(BaseUserManager):
         # 1st step set default values for is_staff and is_superuser
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
+
         # 2nd step check if is_staff and is_superuser are true
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
@@ -42,8 +43,9 @@ class CustomUser(AbstractBaseUser):
     username = models.CharField(max_length=100, unique=True)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
-    active = models.BooleanField(default=True)
-    staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     # let's assign a customer manager to the CustomUser model
     objects = CustomUserManager()
