@@ -29,8 +29,13 @@ class ProductPagination(PageNumberPagination):
     max_page_size = 100
 
 # Implement CRUD operations for users who will manage the products
-class ProductList(generics.ListCreateAPIView):
+class ProductListCreateView(generics.ListCreateAPIView):
     authentication_classes = [TokenAuthentication]
+    # let's create a permission request for creating a product
+    def get_permissions(self):
+        if self.request.method == 'POST':
+            return [IsAdminOrReadOnly()]
+        return [IsAuthenticated()]
     #permission_classes = [IsAuthenticated]
     filter_backends = [filters.SearchFilter]
     search_fields = ['name', 'category', 'price', 'stock_quantity' ]

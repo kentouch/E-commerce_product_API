@@ -5,6 +5,7 @@ from rest_framework.authtoken.models import Token
 from django.urls import reverse
 from .models import Product, Category
 from django.contrib.auth import get_user_model
+from unittest.mock import patch
 
 class BookAPITest(test.APITestCase):
     
@@ -96,7 +97,7 @@ class BookAPITest(test.APITestCase):
     
     ### Test to update an existing product
     # from unittest.mock import patch for patching permission_classes
-    from unittest.mock import patch
+   
     # patching permission_classes
     @patch('api.views.ProductDetailView.permission_classes', [])
     def test_update_product(self):
@@ -148,7 +149,7 @@ class BookAPITest(test.APITestCase):
     def test_list_category(self):
 
         # url for the API endpoint to list categories
-        url = reverse('category-list')
+        url = reverse('category-list-create')
         # Simulate a get request 
         response = self.client.get(url) 
         # checking if the request is succeeding 
@@ -156,7 +157,7 @@ class BookAPITest(test.APITestCase):
 
     def test_create_category(self):
         # url for the API endpoint to create a category
-        url = reverse('category-list')
+        url = reverse('category-list-create')
         # enter category data
         data = {
                 'name': 'Electronics'
