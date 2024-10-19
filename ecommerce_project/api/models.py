@@ -68,11 +68,11 @@ class Category(models.Model):
 # let's create a Product model
 # it should have the following attributes: Name, Description, Price, Category, Stock Quantity, Image URL, and Created Date
 class Product(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, blank=False)
     description = models.TextField()
-    price = models.FloatField()
+    price = models.FloatField(blank=False, null=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    stock_quantity = models.IntegerField()
+    stock_quantity = models.IntegerField(blank=False, null=False)
     image_url = models.URLField()
     created_date = models.DateTimeField(auto_now_add=True)  # Add the created_date field
 
